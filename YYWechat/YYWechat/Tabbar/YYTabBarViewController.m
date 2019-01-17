@@ -38,7 +38,7 @@
         item.title = _titleArr[i];
         item.image = [UIImage imageNamed:_imageArr[i]];
         item.selectedImage = [[UIImage imageNamed:_selImageArr[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//        [item setTitleTextAttributes:@{NSForegroundColorAttributeName : Global_tintColor} forState:UIControlStateSelected];
+        [item setTitleTextAttributes:@{NSForegroundColorAttributeName : Global_tintColor} forState:UIControlStateSelected];
         [self addChildViewController:nav];
     }
 }
