@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WeChatModel : NSObject
-
+@property(nonatomic, copy)NSString *imageName;
+@property(nonatomic, copy)NSString *nickName;
+@property(nonatomic, copy)NSString *time;
+@property(nonatomic, copy)NSString *message;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,10 @@
 //
 
 #import "WeChatTableViewController.h"
+#import "WeChatModel.h"
+#import "WeChatTableViewCell.h"
 
+#define kWeChatCellID @"wechatcellid"
 @interface WeChatTableViewController ()
 
 @end
@@ -17,6 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.rowHeight = 70;
+    self.tableView.bounces = NO;
+    UIView * footer = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = footer;
+    [self getCellDataSourceWithCount:2];
+    [self.tableView registerClass:[WeChatTableViewCell class] forCellReuseIdentifier:kWeChatCellID];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -24,47 +34,51 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+-(void)getCellDataSourceWithCount:(NSInteger)count{
+    for (int i = 0; i < count; i++) {
+        WeChatModel *model = [[WeChatModel alloc] init];
+        model.imageName = @"669959983.jpg";
+        model.nickName = @"周岳阳";
+        model.time = @"16:10";
+        model.message = @"....";
+        [self.dataSourceArray addObject:model];
+    }
 }
+
+#pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.dataSourceArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
+    WeChatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kWeChatCellID forIndexPath:indexPath];
+    cell.model = self.dataSourceArray[indexPath.row];
     // Configure the cell...
     
     return cell;
 }
-*/
 
-/*
+
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
