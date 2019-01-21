@@ -7,7 +7,10 @@
 //
 
 #import "ContactsTableViewController.h"
+#import "ContactsTableViewCell.h"
+#import "ContactsModel.h"
 
+#define kContactsCellID @"kcontactscellid"
 @interface ContactsTableViewController ()
 
 @end
@@ -16,7 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.rowHeight = 70;
+    self.tableView.bounces = NO;
+    UIView * footer = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = footer;
+    [self getCellDataSourceWithCount:2];
+    [self.tableView registerClass:[ContactsTableViewCell class] forCellReuseIdentifier:kContactsCellID];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -24,27 +33,37 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)getCellDataSourceWithCount:(NSInteger)count{
+    for (int i = 0; i < count; i++) {
+        ContactsModel *model = [[ContactsModel alloc] init];
+        model.iconImageName = @"669959983.jpg";
+        model.nickName = @"周岳阳";
+        [self.dataSourceArray addObject:model];
+    }
+}
+
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//#warning Incomplete implementation, return the number of sections
+//    return 0;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.dataSourceArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
+    ContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kContactsCellID forIndexPath:indexPath];
+    cell.model = self.dataSourceArray[indexPath.row];
     // Configure the cell...
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
