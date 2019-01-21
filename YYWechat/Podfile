@@ -7,4 +7,5 @@ target 'YYWechat' do
 
   # Pods for YYWechat
 pod 'Masonry'
+pod 'TTTAttributedLabel'
 end
