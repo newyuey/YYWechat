@@ -524,7 +524,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				GCC_PREFIX_HEADER = /Users/startiasoft/YYWechat/YYWechat/YYWechat/Others/YYWechat.pch;
+				GCC_PREFIX_HEADER = YYWechat/Others/YYWechat.pch;
 				INFOPLIST_FILE = YYWechat/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -544,7 +544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				GCC_PREFIX_HEADER = /Users/startiasoft/YYWechat/YYWechat/YYWechat/Others/YYWechat.pch;
+				GCC_PREFIX_HEADER = YYWechat/Others/YYWechat.pch;
 				INFOPLIST_FILE = YYWechat/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
