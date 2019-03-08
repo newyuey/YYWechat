@@ -23,7 +23,7 @@
     self.tableView.bounces = NO;
     UIView * footer = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.tableFooterView = footer;
-    [self getCellDataSourceWithCount:2];
+    [self getCellDataSourceWithCount:28];
     [self.tableView registerClass:[ContactsTableViewCell class] forCellReuseIdentifier:kContactsCellID];
     self.tableView.backgroundColor = [UIColor whiteColor];
     // Uncomment the following line to preserve selection between presentations.
@@ -32,12 +32,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+//朱秦尤许，何吕施张。孔曹严华，金魏陶姜。
 -(void)getCellDataSourceWithCount:(NSInteger)count{
+    NSArray *lastNameArr = @[@"赵",@"钱",@"孙",@"李",@"周",@"吴",@"郑",@"王",@"冯",@"陈",@"楚",@"卫",@"蒋",@"沈",@"韩",@"杨",@"先",@"秦",@"尤",@"许",@"何",@"吕",@"施",@"张",@"孔",@"曹",@"严",@"华",@"金",@"魏",@"陶",@"姜"];
+    NSArray *firstNameArr = @[@"建国",@"拥军",@"爱民",@"爱国",@"爱党",@"淑芬",@"铁柱",@"大牛",@"狗蛋",@"栓子",@"狗剩",@"腾飞",@"成功",@"成才"];
     for (int i = 0; i < count; i++) {
+        NSString *lastNameStr = lastNameArr[arc4random_uniform((int)lastNameArr.count)];
+        NSString *firstNameStr = firstNameArr[arc4random_uniform((int)firstNameArr.count)];
+        NSString *name = [lastNameStr stringByAppendingString:firstNameStr];
         ContactsModel *model = [[ContactsModel alloc] init];
         model.iconImageName = @"669959983.jpg";
-        model.nickName = @"周岳阳";
+        model.nickName = name;
         [self.dataSourceArray addObject:model];
     }
 }
