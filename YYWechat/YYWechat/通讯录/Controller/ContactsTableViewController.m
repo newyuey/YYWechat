@@ -12,7 +12,9 @@
 
 #define kContactsCellID @"kcontactscellid"
 @interface ContactsTableViewController ()
+@property (nonatomic,strong) NSMutableArray *sectionArray;
 
+@property (nonatomic, strong) NSMutableArray *sectionTitlesArray;
 @end
 
 @implementation ContactsTableViewController
@@ -32,9 +34,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-//朱秦尤许，何吕施张。孔曹严华，金魏陶姜。
+
 -(void)getCellDataSourceWithCount:(NSInteger)count{
-    NSArray *lastNameArr = @[@"赵",@"钱",@"孙",@"李",@"周",@"吴",@"郑",@"王",@"冯",@"陈",@"楚",@"卫",@"蒋",@"沈",@"韩",@"杨",@"先",@"秦",@"尤",@"许",@"何",@"吕",@"施",@"张",@"孔",@"曹",@"严",@"华",@"金",@"魏",@"陶",@"姜"];
+    NSArray *lastNameArr = @[@"赵",@"钱",@"孙",@"李",@"周",@"吴",@"郑",@"王",@"冯",@"陈",@"楚",@"卫",@"蒋",@"沈",@"韩",@"杨",@"先",@"秦",@"尤",@"许",@"何",@"吕",@"施",@"张",@"孔",@"曹",@"严",@"华",@"金",@"魏",@"陶",@"姜",@"👋"];
     NSArray *firstNameArr = @[@"建国",@"拥军",@"爱民",@"爱国",@"爱党",@"淑芬",@"铁柱",@"大牛",@"狗蛋",@"栓子",@"狗剩",@"腾飞",@"成功",@"成才"];
     for (int i = 0; i < count; i++) {
         NSString *lastNameStr = lastNameArr[arc4random_uniform((int)lastNameArr.count)];
@@ -45,28 +47,96 @@
         model.nickName = name;
         [self.dataSourceArray addObject:model];
     }
+    
+    [self setupSectionDataSource];
+}
+
+-(void)setupSectionDataSource{
+    UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
+    NSInteger sectionCount = [collation sectionTitles].count;
+    NSMutableArray *newSectionArr = [NSMutableArray arrayWithCapacity:sectionCount];
+    for (int i = 0; i < sectionCount; i++) {
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        [newSectionArr addObject:arr];
+    }
+    
+    for (ContactsModel *model in self.dataSourceArray) {
+        NSInteger sectionNum = [collation sectionForObject:model collationStringSelector:@selector(nickName)];
+        NSMutableArray *sectionNames = newSectionArr[sectionNum];
+        [sectionNames addObject:model];
+    }
+    
+    for (int i = 0; i < sectionCount; i++) {
+        NSMutableArray *personArrForSection = newSectionArr[i];
+        NSArray *sortedPersonArrayForSection = [collation sortedArrayFromArray:personArrForSection collationStringSelector:@selector(nickName)];
+        newSectionArr[i] = sortedPersonArrayForSection;
+    }
+    
+    NSMutableArray *temp = [NSMutableArray new];
+    self.sectionTitlesArray = [NSMutableArray new];
+    
+    [newSectionArr enumerateObjectsUsingBlock:^(NSArray *arr, NSUInteger idx, BOOL *stop) {
+        if (arr.count == 0) {
+            [temp addObject:arr];
+        } else {
+            [self.sectionTitlesArray addObject:[collation sectionTitles][idx]];
+        }
+    }];
+    
+    [newSectionArr removeObjectsInArray:temp];
+    
+    NSMutableArray *operrationModels = [NSMutableArray new];
+    NSArray *dicts = @[@{@"name" : @"新的朋友", @"imageName" : @"plugins_FriendNotify"},
+                       @{@"name" : @"群聊", @"imageName" : @"add_friend_icon_addgroup"},
+                       @{@"name" : @"标签", @"imageName" : @"Contact_icon_ContactTag"},
+                       @{@"name" : @"公众号", @"imageName" : @"add_friend_icon_offical"}];
+    for (NSDictionary *dict in dicts) {
+        ContactsModel *model = [ContactsModel new];
+        model.nickName = dict[@"name"];
+        model.iconImageName = dict[@"imageName"];
+        [operrationModels addObject:model];
+    }
+    
+    [newSectionArr insertObject:operrationModels atIndex:0];
+    [self.sectionTitlesArray insertObject:@"" atIndex:0];
+    
+    self.sectionArray = newSectionArr;
 }
 
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Incomplete implementation, return the number of sections
-//    return 0;
-//}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return self.dataSourceArray.count;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#warning Incomplete implementation, return the number of sections
+    return self.sectionTitlesArray.count;
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.sectionArray[section] count];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kContactsCellID forIndexPath:indexPath];
-    cell.model = self.dataSourceArray[indexPath.row];
+    ContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kContactsCellID];
+    if (!cell) {
+        cell = [[ContactsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kContactsCellID];
+    }
+    cell.model = self.sectionArray[indexPath.section][indexPath.row];
     // Configure the cell...
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return [self.sectionTitlesArray objectAtIndex:section];
+}
+
+
+- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    return self.sectionTitlesArray;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 

@@ -9,14 +9,20 @@
 #import "DiscoverTableViewController.h"
 
 @interface DiscoverTableViewController ()
-
+@property (nonatomic, strong)NSArray *titleArr;
+@property (nonatomic, strong)NSArray *imgArr;
 @end
 
 @implementation DiscoverTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.titleArr = @[@[@"朋友圈"],@[@"扫一扫",@"摇一摇"],@[@"看一看",@"搜一搜"],@[@"附近的人",@"漂流瓶"],@[@"购物",@"游戏"],@[@"小程序"]];
+    self.imgArr = @[@[@"ff_IconShowAlbum"],@[@"ff_IconQRCode",@"ff_IconShake"],@[@"看一看",@"搜一搜"],@[@"ff_IconLocationService",@"漂流瓶"],@[@"CreditCard_ShoppingBag",@"MoreGame"],@[@"小程序"]];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    UIView * footer = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = footer;
+    self.tableView.backgroundColor = [UIColor whiteColor];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -27,24 +33,36 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    if (section == 0 || section == 5) {
+        return 1;
+    }else{
+        return 2;
+    }
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    cell.textLabel.text = self.titleArr[indexPath.section][indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:self.imgArr[indexPath.section][indexPath.row]];
     // Configure the cell...
     
     return cell;
 }
-*/
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithRed:247 green:247 blue:247 alpha:1.0];
+    return headerView;
+}
 
 /*
 // Override to support conditional editing of the table view.

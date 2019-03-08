@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B6EB61A2232C40A004306D2 /* DiscoverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6EB6192232C40A004306D2 /* DiscoverTableViewCell.m */; };
 		AB278A9321F01A26007DD02D /* WeChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB278A9221F01A26007DD02D /* WeChatTableViewCell.m */; };
 		AB278A9621F01A48007DD02D /* WeChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB278A9521F01A48007DD02D /* WeChatModel.m */; };
 		AB278A9821F06FB7007DD02D /* 669959983.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB278A9721F06FB7007DD02D /* 669959983.jpg */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B6EB6182232C40A004306D2 /* DiscoverTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoverTableViewCell.h; sourceTree = "<group>"; };
+		1B6EB6192232C40A004306D2 /* DiscoverTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverTableViewCell.m; sourceTree = "<group>"; };
 		733E356D7206A1955D70B4CD /* libPods-YYWechat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YYWechat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF87D28EE2C2E4A684D6F22 /* Pods-YYWechat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YYWechat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YYWechat/Pods-YYWechat.debug.xcconfig"; sourceTree = "<group>"; };
 		AB278A9121F01A26007DD02D /* WeChatTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeChatTableViewCell.h; sourceTree = "<group>"; };
@@ -92,6 +95,54 @@
 				C1077B880A4B9BC4BB281D0B /* Pods-YYWechat.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		1B6EB6122232BF02004306D2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AB74C53E21EF0E0F0012766C /* DiscoverTableViewController.h */,
+				AB74C53F21EF0E0F0012766C /* DiscoverTableViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1B6EB6132232BF10004306D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B6EB6142232BF17004306D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B6EB6182232C40A004306D2 /* DiscoverTableViewCell.h */,
+				1B6EB6192232C40A004306D2 /* DiscoverTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B6EB6152232C0BF004306D2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AB74C54121EF0E1A0012766C /* MeTableViewController.h */,
+				AB74C54221EF0E1A0012766C /* MeTableViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1B6EB6162232C0C8004306D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B6EB6172232C0CE004306D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		3C5DB414569BD826405073C6 /* Frameworks */ = {
@@ -219,8 +270,9 @@
 		AB74C53321EF08480012766C /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
-				AB74C53E21EF0E0F0012766C /* DiscoverTableViewController.h */,
-				AB74C53F21EF0E0F0012766C /* DiscoverTableViewController.m */,
+				1B6EB6142232BF17004306D2 /* View */,
+				1B6EB6132232BF10004306D2 /* Model */,
+				1B6EB6122232BF02004306D2 /* Controller */,
 			);
 			path = "发现";
 			sourceTree = "<group>";
@@ -228,8 +280,9 @@
 		AB74C53421EF084D0012766C /* 我 */ = {
 			isa = PBXGroup;
 			children = (
-				AB74C54121EF0E1A0012766C /* MeTableViewController.h */,
-				AB74C54221EF0E1A0012766C /* MeTableViewController.m */,
+				1B6EB6172232C0CE004306D2 /* View */,
+				1B6EB6162232C0C8004306D2 /* Model */,
+				1B6EB6152232C0BF004306D2 /* Controller */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -381,6 +434,7 @@
 				AB74C51F21EED9590012766C /* main.m in Sources */,
 				AB777ADA21F5AFED0096AFE9 /* ContactsTableViewCell.m in Sources */,
 				AB74C53721EF087F0012766C /* YYBaseTableViewController.m in Sources */,
+				1B6EB61A2232C40A004306D2 /* DiscoverTableViewCell.m in Sources */,
 				AB74C51121EED9580012766C /* AppDelegate.m in Sources */,
 				AB278A9621F01A48007DD02D /* WeChatModel.m in Sources */,
 				AB74C53D21EF0DF90012766C /* ContactsTableViewController.m in Sources */,
@@ -523,7 +577,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4939D4959S;
 				GCC_PREFIX_HEADER = YYWechat/Others/YYWechat.pch;
 				INFOPLIST_FILE = YYWechat/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -543,7 +597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4939D4959S;
 				GCC_PREFIX_HEADER = YYWechat/Others/YYWechat.pch;
 				INFOPLIST_FILE = YYWechat/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
