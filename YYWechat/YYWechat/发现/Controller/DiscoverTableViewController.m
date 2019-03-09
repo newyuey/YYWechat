@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleArr = @[@[@"朋友圈"],@[@"扫一扫",@"摇一摇"],@[@"看一看",@"搜一搜"],@[@"附近的人",@"漂流瓶"],@[@"购物",@"游戏"],@[@"小程序"]];
-    self.imgArr = @[@[@"ff_IconShowAlbum"],@[@"ff_IconQRCode",@"ff_IconShake"],@[@"看一看",@"搜一搜"],@[@"ff_IconLocationService",@"漂流瓶"],@[@"CreditCard_ShoppingBag",@"MoreGame"],@[@"小程序"]];
+    self.imgArr = @[@[@"ff_IconShowAlbum"],@[@"ff_IconQRCode",@"ff_IconShake"],@[@"kyk_icon",@"sys_icon"],@[@"fjdr_icon",@"plp_icon"],@[@"CreditCard_ShoppingBag",@"MoreGame"],@[@"xcx_icon"]];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     UIView * footer = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.tableFooterView = footer;
@@ -49,6 +49,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     cell.textLabel.text = self.titleArr[indexPath.section][indexPath.row];
     cell.imageView.image = [UIImage imageNamed:self.imgArr[indexPath.section][indexPath.row]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // Configure the cell...
     
     return cell;
@@ -60,7 +61,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerView = [[UIView alloc] init];
-    headerView.backgroundColor = [UIColor colorWithRed:247 green:247 blue:247 alpha:1.0];
+    headerView.backgroundColor = [UIColor lightGrayColor];
     return headerView;
 }
 
